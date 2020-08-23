@@ -1,4 +1,15 @@
-# Read in CSV File
+""" A simple script to generate stats reports for the GNK-HXC challenge.
+
+Args:
+    csvFileName (str): The file system path/name of a CSV file containing data in the GNK-HXC format.  WARNING: Any
+                     deviations from this are not supported!
+Returns:
+     str: A console output of the various stats.
+"""
+
+# TODO: Currently all stats are returned everytime, would be a nicer utility to be able to invoke the script for
+#       specific stats.
+
 import csv
 import sys
 
@@ -9,7 +20,17 @@ from fractions import Fraction
 ###################
 # Utility Methods #
 ###################
+
 def extractCSVDataToKVStore(csvFileName):
+    """ Converts CSV data into a more easily usable data structure, a Key-Value Store.
+
+    Args:
+        csvFileName (str): The file system path/name of a CSV file containing data in the GNK-HXC format.  WARNING: Any
+                         deviations from this are not supported!
+    Returns:
+        list: A Key-Value store, aka an array of dict's, each dict being key'd on the CSV's column headers and having a
+               row's values.
+    """
     with open(csvFileName, newline='') as csvfile:
         csvReader = csv.reader(csvfile, delimiter=',', quotechar='|')
 
@@ -50,6 +71,15 @@ def extractCSVDataToKVStore(csvFileName):
 
 # TODO - Allow for number formatting
 def generateMonocharcterString(character, length):
+    """ A utility method to generate a monocharacter string of a given length.
+
+    Args:
+        character (str): The character that should comprise the string.
+        length (number): The desired length of the string.
+
+    Returns:
+        str: A monocharacter string of a given length.
+    """
     monoCharString = ""
     i = 0
     while i < length:
@@ -59,6 +89,12 @@ def generateMonocharcterString(character, length):
     return monoCharString
 
 def printSortedDict(printDict, sectionTitle):
+    """ A utility method to sort and console-print a dict.
+
+    Args:
+        printDict (dict): An arbitrary dict, with mutually sortable values.
+        sectionTitle (str): Optional. A field title to print above the dict.
+    """
     # Finally sort descending our dictionary of Number-of-characters-by-Player, and print.
     printDict = sorted(printDict.items(), key=lambda x: x[1], reverse=True)
 
@@ -73,7 +109,12 @@ def printSortedDict(printDict, sectionTitle):
 # By-Player Stat methods #
 ##########################
 def printNcByPlayer(kvStoreGroupedByPlayer):
-    # Calculate and print Number of characters.
+    """ A method to print the NC (Number of Characters) stat for each player.
+
+    Args:
+        kvStoreGroupedByPlayer (dict): A dict with Keys being the Players, and values being a list of each data row for
+         for that player.
+    """
     numCharactersByPlayerDict = {}
 
     # This is simple enough, since we can just check the length of the list characters for each player.
@@ -83,7 +124,12 @@ def printNcByPlayer(kvStoreGroupedByPlayer):
     printSortedDict(numCharactersByPlayerDict, 'NC (Number of Characters)')
 
 def printGlgByPlayer(kvStoreGroupedByPlayer):
-    # Calculate and print GLG (Gross Levels Gained)
+    """ A method to print the GLG (Gross Levels Gained) stat for each player.
+
+    Args:
+        kvStoreGroupedByPlayer (dict): A dict with Keys being the Players, and values being a list of each data row for
+         for that player.
+    """
     glgByPlayerDict = {}
 
     # For each player, loop through each of their characters and total up all the levels
@@ -98,7 +144,12 @@ def printGlgByPlayer(kvStoreGroupedByPlayer):
     printSortedDict(glgByPlayerDict, 'GLG (Gross Levels Gained)')
 
 def printHlcByPlayer(kvStoreGroupedByPlayer):
-    # Calculate and print HCL (Highest Character Level)
+    """ A method to print the HLC (Highest Character Level) stat for each player.
+
+    Args:
+        kvStoreGroupedByPlayer (dict): A dict with Keys being the Players, and values being a list of each data row for
+         for that player.
+    """
     hlcByPlayerDict = {}
 
     # For each player, loop through each of their characters comparing each to find the max.
@@ -113,7 +164,12 @@ def printHlcByPlayer(kvStoreGroupedByPlayer):
     printSortedDict(hlcByPlayerDict, 'HCL (Highest Character Level)')
 
 def printAclByPlayer(kvStoreGroupedByPlayer):
-    # Calculate and print ACL (Average Character Life)
+    """ A method to print the ACL (Average Character Life) stat for each player.
+
+    Args:
+        kvStoreGroupedByPlayer (dict): A dict with Keys being the Players, and values being a list of each data row for
+         for that player.
+    """
     aclByPlayerDict = {}
 
     # For each player, loop through each of their characters and total up all the levels, then divided by number of
@@ -130,7 +186,12 @@ def printAclByPlayer(kvStoreGroupedByPlayer):
     printSortedDict(aclByPlayerDict, 'ACL (Average Character Life)')
 
 def printMdlByPlayer(kvStoreGroupedByPlayer):
-    # Calculate and print MDL (Mean Death Level)
+    """ A method to print the MDL (Mean Death Level) stat for each player.
+
+    Args:
+        kvStoreGroupedByPlayer (dict): A dict with Keys being the Players, and values being a list of each data row for
+         for that player.
+    """
     mdlByPlayerDict = {}
 
     # For each player, loop through each of their characters and total up all the levels of dead characters then
@@ -154,7 +215,12 @@ def printMdlByPlayer(kvStoreGroupedByPlayer):
     printSortedDict(mdlByPlayerDict, 'MDL (Mean Death Level)')
 
 def printByPlayerStats(columnStatsKVStore):
-    # Group our KV Store by player
+    """ A method to print various stats that attributed to individual players.
+
+    Args:
+        columnStatsKVStore (list): A list of dicts, each dict being key'd on the data CSV's column headers and having a
+               row's values.
+    """
     kvStoreGroupedByPlayer = {}
     for characterDict in columnStatsKVStore:
         # If the player already has an entry in the grouped store, simply add this character's data to their existing
@@ -178,6 +244,12 @@ def printByPlayerStats(columnStatsKVStore):
 # Death Stat methods #
 ######################
 def printDeathStats(columnStatsKVStore):
+    """ A method to print various stats that describe global aspects of character death.
+
+    Args:
+        columnStatsKVStore (list): A list of dicts, each dict being key'd on the data CSV's column headers and having a
+               row's values.
+    """
     # Grab our 'Cause of Death' off each Character Entry
     killedByMobList = []
     for characterDict in columnStatsKVStore:
@@ -213,6 +285,12 @@ def printDeathStats(columnStatsKVStore):
 # By-Class Stat methods #
 #########################
 def printByClassStats(columnStatsKVStore):
+    """ A method to print various stats that attributed to each Class.
+
+    Args:
+        columnStatsKVStore (list): A list of dicts, each dict being key'd on the data CSV's column headers and having a
+               row's values.
+    """
     # Group our KV Store by Class
     kvStoreGroupedByClass = {}
     for characterDict in columnStatsKVStore:
