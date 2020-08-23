@@ -20,7 +20,6 @@ from fractions import Fraction
 ###################
 # Utility Methods #
 ###################
-
 def extractCSVDataToKVStore(csvFileName):
     """ Converts CSV data into a more easily usable data structure, a Key-Value Store.
 
@@ -68,6 +67,32 @@ def extractCSVDataToKVStore(csvFileName):
                 kvStore.append(characterData)
 
     return kvStore
+
+
+def groupKVStoreByColumn(columnStatsKVStore, columnToGroupBy):
+    """ A utility method to group our data by the distinct values of a given data column.
+
+    Args:
+        columnStatsKVStore(list): A Key-Value store, aka an array of dict's, each dict being key'd on the CSV's column
+               headers and having a row's values.
+        columnToGroupBy (str): The column to group row data by
+
+    Returns (dict): A dictionary with keys being distinction values of the 'columnToGroupBy', and values being a list of
+                     character data dicts containing that distinct value.
+    """
+    groupedKVStore = {}
+    for characterDict in columnStatsKVStore:
+        # If the column value already has an entry in the grouped store, simply add this character's data to that
+        # existing list
+        currentColValue = characterDict[columnToGroupBy]
+        if currentColValue in groupedKVStore:
+            groupedKVStore[currentColValue].append(characterDict)
+
+        # Otherwise, create an entry for the current player, with the value being a list with this one character data.
+        else:
+            groupedKVStore[currentColValue] = [characterDict]
+
+    return groupedKVStore
 
 # TODO - Allow for number formatting
 def generateMonocharcterString(character, length):
@@ -221,17 +246,7 @@ def printByPlayerStats(columnStatsKVStore):
         columnStatsKVStore (list): A list of dicts, each dict being key'd on the data CSV's column headers and having a
                row's values.
     """
-    kvStoreGroupedByPlayer = {}
-    for characterDict in columnStatsKVStore:
-        # If the player already has an entry in the grouped store, simply add this character's data to their existing
-        # list
-        characterPlayer = characterDict['Character Player']
-        if characterPlayer in kvStoreGroupedByPlayer:
-            kvStoreGroupedByPlayer[characterPlayer].append(characterDict)
-
-        # Otherwise, create an entry for the current player, with the value being a list with this one character data.
-        else:
-            kvStoreGroupedByPlayer[characterPlayer] = [characterDict]
+    kvStoreGroupedByPlayer = groupKVStoreByColumn(columnStatsKVStore, 'Character Player')
 
     # Print each of the stats using our By-Player KV store
     printNcByPlayer(kvStoreGroupedByPlayer)
@@ -292,17 +307,7 @@ def printByClassStats(columnStatsKVStore):
                row's values.
     """
     # Group our KV Store by Class
-    kvStoreGroupedByClass = {}
-    for characterDict in columnStatsKVStore:
-        # If the player already has an entry in the grouped store, simply add this character's data to their existing
-        # list
-        characterClass = characterDict['Class']
-        if characterClass in kvStoreGroupedByClass:
-            kvStoreGroupedByClass[characterClass].append(characterDict)
-
-        # Otherwise, create an entry for the current player, with the value being a list with this one character data.
-        else:
-            kvStoreGroupedByClass[characterClass] = [characterDict]
+    kvStoreGroupedByClass = groupKVStoreByColumn(columnStatsKVStore, 'Class')
 
     # Calculate and print Survival % by class.
     survivalPercentByClassDict = {}
