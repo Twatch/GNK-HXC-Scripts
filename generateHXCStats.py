@@ -48,6 +48,27 @@ def extractCSVDataToKVStore(csvFileName):
 
     return kvStore
 
+# TODO - Allow for number formatting
+def generateMonocharcterString(character, length):
+    monoCharString = ""
+    i = 0
+    while i < length:
+        monoCharString = monoCharString + character
+        i += 1
+
+    return monoCharString
+
+def printSortedDict(printDict, sectionTitle):
+    # Finally sort descending our dictionary of Number-of-characters-by-Player, and print.
+    printDict = sorted(printDict.items(), key=lambda x: x[1], reverse=True)
+
+    print(sectionTitle + '\n' + generateMonocharcterString('-', len(sectionTitle)))
+
+    for printDictEntry in printDict:
+        print(printDictEntry[0], ":", printDictEntry[1])
+
+    print("\n")
+
 ##########################
 # By-Player Stat methods #
 ##########################
@@ -59,15 +80,7 @@ def printNcByPlayer(kvStoreGroupedByPlayer):
     for player, characterList in kvStoreGroupedByPlayer.items():
         numCharactersByPlayerDict[player] = len(characterList)
 
-    # Finally sort descending our dictionary of Number-of-characters-by-Player, and print.
-    numCharactersByPlayerDict = sorted(numCharactersByPlayerDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("NC (Number of Characters)\n--------")
-
-    for playerNC in numCharactersByPlayerDict:
-        print(playerNC[0], ":", playerNC[1])
-
-    print("\n")
+    printSortedDict(numCharactersByPlayerDict, 'NC (Number of Characters)')
 
 def printGlgByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print GLG (Gross Levels Gained)
@@ -82,15 +95,7 @@ def printGlgByPlayer(kvStoreGroupedByPlayer):
 
         glgByPlayerDict[player] = currentPlayerGlg
 
-    # Finally sort descending our dictionary of GLG-by-Player, and print.
-    glgByPlayerDict = sorted(glgByPlayerDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("GLG (Gross Levels Gained)\n--------")
-
-    for playerGlg in glgByPlayerDict:
-        print(playerGlg[0], ":", playerGlg[1])
-
-    print("\n")
+    printSortedDict(glgByPlayerDict, 'GLG (Gross Levels Gained)')
 
 def printHlcByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print HCL (Highest Character Level)
@@ -105,15 +110,7 @@ def printHlcByPlayer(kvStoreGroupedByPlayer):
 
         hlcByPlayerDict[player] = currentPlayerHighestLevel
 
-    # Finally sort descending our dictionary of HLC-by-Player, and print.
-    hlcByPlayerDict = sorted(hlcByPlayerDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("HCL (Highest Character Level)\n--------")
-
-    for playerHcl in hlcByPlayerDict:
-        print(playerHcl[0], ":", playerHcl[1])
-
-    print("\n")
+    printSortedDict(hlcByPlayerDict, 'HCL (Highest Character Level)')
 
 def printAclByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print ACL (Average Character Life)
@@ -130,15 +127,7 @@ def printAclByPlayer(kvStoreGroupedByPlayer):
         # Compute ACL by dividing total levels by number of characters, and finally round down any decimals.
         aclByPlayerDict[player] = math.floor(totalCharacterLevels / len(characterList))
 
-    # Finally sort descending our dictionary of ACL-by-Player, and print.
-    aclByPlayerDict = sorted(aclByPlayerDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("ACL (Average Character Life)\n--------")
-
-    for playerAcl in aclByPlayerDict:
-        print(playerAcl[0], ":", playerAcl[1])
-
-    print("\n")
+    printSortedDict(aclByPlayerDict, 'ACL (Average Character Life)')
 
 def printMdlByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print MDL (Mean Death Level)
@@ -162,16 +151,7 @@ def printMdlByPlayer(kvStoreGroupedByPlayer):
         else:
             mdlByPlayerDict[player] = 0
 
-    # Finally sort descending our dictionary of MDL-by-Player, and print.
-    mdlByPlayerDict = sorted(mdlByPlayerDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("MDL (Mean Death Level)\n--------")
-
-    # If someone's never had a character die, print 'N/A' instead of 0.
-    for playerMdl in mdlByPlayerDict:
-        print(playerMdl[0], ":", playerMdl[1])
-
-    print("\n")
+    printSortedDict(mdlByPlayerDict, 'MDL (Mean Death Level)')
 
 def printByPlayerStats(columnStatsKVStore):
     # Group our KV Store by player
@@ -220,13 +200,7 @@ def printDeathStats(columnStatsKVStore):
         else:
             totalAlive = killedByMobList.count(mob)
 
-    # Finally sort descending the mob dict, and print the header and rows
-    killedByMobDict = sorted(killedByMobDict.items(), key=lambda x: x[1], reverse=True)
-
-    print("Cause of Death (" + str(totalDeaths) + ")\n--------")
-
-    for mobEntry in killedByMobDict:
-        print(mobEntry[0], ":", mobEntry[1])
+    printSortedDict(killedByMobDict, 'Cause of Death (' + str(totalDeaths) + ')')
 
     # Next Print the Dead-to-Living ratio
     deadToLivingFracation = Fraction(totalDeaths, totalAlive)
@@ -292,6 +266,3 @@ else:
     printDeathStats(characterDataKVStore)
 
     printByClassStats(characterDataKVStore)
-
-
-
