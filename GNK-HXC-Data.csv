@@ -1,19 +1,30 @@
-Character Name,Level,Character Player,Race,Class,Profession 1,Profession 2,Cause of Death,Death Notes
-Evolutiion,8,Tony,Night Elf,Druid,,,Unrecorded,
-Evohxcii,17,Tony,Human,Warrior,Alchemy,Herbalism,Unrecorded,
-Evohxctri,8,Tony,Dwarf,Priest,,,Defias Bandit,Defias
-Evoquattro,11,Tony,Human,???,,,,
-Evildeadi,14,Twitch,Human,Warlock,Tailoring,Herbalism,,
-Gnkalphai,8,Al,Human,Warrior,,,Defias Bandit,Defias
-Gnkbetaii,12,Al,Human,Warrior,Blacksmithing,Mining,,
-Burbonrogue,13,Jeff,Human,Rogue,Leatherworking,Skinning,Defias Trapper,Defias
-Taketwo,7,Jeff,Human,Rogue ,,,Kobold Tunneler,Goldtooth
-Takethree,9,Jeff,Human,Rogue,Leatherworking,Skinning,Princess,
-Takefour,16,Jeff,Human,Mage,Tailoring,Skinning,Defias Pillager,Defias
-Takefive,16,Jeff,Human,Mage,,,,
-Wontdie,3,Doomhawk,Night Elf,Druid,,,,
-Tiredofsnake,11,Alec,Human,Paladin,,,Rockjaw Bonesnapper,Trog
-Bingzir,7,Alec,Dwarf,Paladin,,,,
-Bootymeatboi,3,Dom,Dwarf,Paladin,,,,
-Fullytorqued,4,Robbie,Night Elf,Druid,,,Webwood lurker,Spider
-ShreddinGnar,6,Robbie,Night Elf,Druid,Leatherworking,Skinning,,
+Character Name,Level,Tier,Character Player,Race,Class,Profession 1,Profession 2,Created,Cause of Death,Zone of Death,Death Notes,Wealth,Time of Death
+Evolutiion,6,0,Tony,Night Elf,Druid,,,07/05/2020 12:00 AM,Timberling Bark Ripper,Teldrassil,,Unrecorded,07/07/2020 5:23 PM
+Evohxcii,17,1,Tony,Human,Warrior,Alchemy,Herbalism,07/07/2020 5:25 PM,Den Mother,Darkshore,Boss,Unrecorded,07/20/2020 7:41 PM
+Evohxctri,7,0,Tony,Dwarf,Priest,,,07/20/2020 8:09 PM,Defias Bandit,Elwynn Forest,Defias,Unrecorded,Unrecorded
+Evoquattro,13,1,Tony,Human,Paladin,,,Unrecorded,Unrecorded,Unrecorded,,Unrecorded,Unrecorded
+Evoee,6,0,Tony,Night Elf,Druid,,,Unrecorded,Vicious Grell,Teldrassil,,Unrecorded,Unrecorded
+Evosix,8,0,Tony,,Paladin,,,Unrecorded,Unrecorded,Unrecorded,,Unrecorded,Unrecorded
+Moardeath,14,1,Tony,Dwarf,Hunter,Engineering,Mining,Unrecorded,Raging Moonkin,Darkshore,,Unrecorded,Unrecorded
+Finalattempt,13,1,Tony,Human,Paladin,,,Unrecorded,Defias Pillager,Westfall,Defias,Unrecorded,8/19/2020 5:31 PM
+Evildeadi,14,1,Twitch,Human,Warlock,Tailoring,Herbalism,07/05/2020 12:00 AM,Defias Trapper,Westfall,Defias,0.68g,07/26/2020 9:13 AM
+Pleasegodii,21,2,Twitch,Dwarf,Priest,Alchemy,Herbalism,07/26/2020 9:15 AM,Redrudge Brute,Redridge,Fall Damage,0.83g,8/16/2020 8:43 PM
+IsNoGodTres,6,0,Twitch,Night Elf,Priest,,,08/16/2020 9:47 PM,,,,,
+Gnkalphai,8,0,Al,Human,Warrior,,,07/05/2020 12:00 AM,Defias Bandit,Elwynn Forest,Defias,Unrecorded,07/08/2020 12:12 AM
+Gnkbetaii,17,1,Al,Human,Warrior,Blacksmithing,Mining,07/08/2020 12:15 AM,Defias Pillager,Westfall,Defias,Unrecorded,08/06/2020 10:00 PM
+Gnkgamma,10,0,Al,Night Elf,Hunter,Leatherworking,Skinning,08/06/2020 10:08 PM,,,,Unrecorded,
+Burbonrogue,13,1,Jeff,Human,Rogue,Leatherworking,Skinning,07/05/2020 9:50 AM,Defias Trapper,Westfall,Defias,Unrecorded,07/12/2020 12:32 PM
+Taketwo,7,0,Jeff,Human,Rogue ,,,07/12/2020 12:35 PM,Kobold Tunneler,Elwynn Forest,Goldtooth,Unrecorded,07/12/2020 1:52 PM
+Takethree,9,0,Jeff,Human,Rogue,Leatherworking,Skinning,07/12/2020 1:55 PM,Princess,Elwynn Forest,Boss,Unrecorded,07/19/2020 9:53 AM
+Takefour,16,1,Jeff,Human,Mage,Tailoring,Skinning,07/19/2020 9:56 AM,Defias Pillager,Westfall,Defias,Unrecorded,Unrecorded
+Takefive,19,1,Jeff,Human,Mage,Tailoring,Skinning,Unrecorded,Unrecorded,,,Unrecorded,08/01/2020 10:53 PM
+Takesix,7,0,Jeff,Human,Mage,,,08/01/2020 11:03 PM,Kobold Tunneler,Elwynn Forest,Kobold,Unrecorded,08/02/2020 5:26 PM
+Takeseven,21,2,Jeff,Dwarf,Hunter,Leatherworking,Skinning,Unrecorded,Forsaken Seer,Ashenvale,2nd Session of the day,Unrecorded,8/10/2020 7:13 PM
+Takeeight,14,1,Jeff,Dwarf,Hunter,Leatherworking,Skinning,8/10/2020 7:16 PM,Stonesplitter Seer,Loch Modan,Trog,Unrecorded,8/11/2020 3:30 PM
+Wontdie,5,0,Doomhawk,Night Elf,Druid,,,07/05/2020 11:23 AM,,,,Unrecorded,
+Tiredofsnake,11,1,Alec,Human,Paladin,,,07/07/2020 7:17 PM,Rockjaw Bonesnapper,Dun Morogh,Trog,Unrecorded,07/20/2020 9:31 AM
+Bingzir,7,0,Alec,Dwarf,Paladin,,,07/20/2020 8:00 AM,,,,Unrecorded,
+Bootymeatboi,10,1,Dom,Dwarf,Paladin,Engineering,Mining,07/08/2020 6:39 PM,,,,Unrecorded,
+Fullytorqued,4,0,Robbie,Night Elf,Druid,,,07/20/2020 3:03 PM,Webwood lurker,Teldrassil,Spider,Unrecorded,07/20/2020 9:55 PM
+ShreddinGnar,6,0,Robbie,Night Elf,Druid,Leatherworking,Skinning,07/20/2020 9:59 PM,Webwood lurker,Teldrassil,"""Just Hop in for a minute""",Unrecorded,08/04/2020 10:14 PM
+Levv,15,0,Jill,Human,Paladin,,,,,,,Unrecorded,

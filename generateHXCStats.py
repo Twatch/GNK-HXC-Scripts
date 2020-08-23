@@ -6,6 +6,9 @@ import math
 
 from fractions import Fraction
 
+###################
+# Utility Methods #
+###################
 def extractCSVDataToKVStore(csvFileName):
     with open(csvFileName, newline='') as csvfile:
         csvReader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -45,20 +48,10 @@ def extractCSVDataToKVStore(csvFileName):
 
     return kvStore
 
-def printByPlayerStats(columnStatsKVStore):
-    # Group our KV Store by player
-    kvStoreGroupedByPlayer = {}
-    for characterDict in columnStatsKVStore:
-        # If the player already has an entry in the grouped store, simply add this character's data to their existing
-        # list
-        characterPlayer = characterDict['Character Player']
-        if characterPlayer in kvStoreGroupedByPlayer:
-            kvStoreGroupedByPlayer[characterPlayer].append(characterDict)
-
-        # Otherwise, create an entry for the current player, with the value being a list with this one character data.
-        else:
-            kvStoreGroupedByPlayer[characterPlayer] = [characterDict]
-
+##########################
+# By-Player Stat methods #
+##########################
+def printNcByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print Number of characters.
     numCharactersByPlayerDict = {}
 
@@ -76,6 +69,7 @@ def printByPlayerStats(columnStatsKVStore):
 
     print("\n")
 
+def printGlgByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print GLG (Gross Levels Gained)
     glgByPlayerDict = {}
 
@@ -98,6 +92,7 @@ def printByPlayerStats(columnStatsKVStore):
 
     print("\n")
 
+def printHlcByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print HCL (Highest Character Level)
     hlcByPlayerDict = {}
 
@@ -120,6 +115,7 @@ def printByPlayerStats(columnStatsKVStore):
 
     print("\n")
 
+def printAclByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print ACL (Average Character Life)
     aclByPlayerDict = {}
 
@@ -144,6 +140,7 @@ def printByPlayerStats(columnStatsKVStore):
 
     print("\n")
 
+def printMdlByPlayer(kvStoreGroupedByPlayer):
     # Calculate and print MDL (Mean Death Level)
     mdlByPlayerDict = {}
 
@@ -176,6 +173,30 @@ def printByPlayerStats(columnStatsKVStore):
 
     print("\n")
 
+def printByPlayerStats(columnStatsKVStore):
+    # Group our KV Store by player
+    kvStoreGroupedByPlayer = {}
+    for characterDict in columnStatsKVStore:
+        # If the player already has an entry in the grouped store, simply add this character's data to their existing
+        # list
+        characterPlayer = characterDict['Character Player']
+        if characterPlayer in kvStoreGroupedByPlayer:
+            kvStoreGroupedByPlayer[characterPlayer].append(characterDict)
+
+        # Otherwise, create an entry for the current player, with the value being a list with this one character data.
+        else:
+            kvStoreGroupedByPlayer[characterPlayer] = [characterDict]
+
+    # Print each of the stats using our By-Player KV store
+    printNcByPlayer(kvStoreGroupedByPlayer)
+    printGlgByPlayer(kvStoreGroupedByPlayer)
+    printHlcByPlayer(kvStoreGroupedByPlayer)
+    printAclByPlayer(kvStoreGroupedByPlayer)
+    printMdlByPlayer(kvStoreGroupedByPlayer)
+
+######################
+# Death Stat methods #
+######################
 def printDeathStats(columnStatsKVStore):
     # Grab our 'Cause of Death' off each Character Entry
     killedByMobList = []
@@ -214,6 +235,9 @@ def printDeathStats(columnStatsKVStore):
 
     print("\n")
 
+#########################
+# By-Class Stat methods #
+#########################
 def printByClassStats(columnStatsKVStore):
     # Group our KV Store by Class
     kvStoreGroupedByClass = {}
